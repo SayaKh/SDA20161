@@ -1,0 +1,36 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package addStd;
+
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Ghada
+ */
+public class Adding {
+
+    private Statement aStatement;
+
+    public boolean addStudent(Student std) {
+        dbConnection adbConnection = dbConnection.getdbConnection();
+        boolean isAdded = false;
+        try {
+          this.aStatement = adbConnection.getStatement();
+            
+            String query = "insert into Student(student_id,student_name,student_major) values ('" + std.getId() + "','"
+                    + std.getName() + "','" + std.getSp() + "')";
+            isAdded = aStatement.execute(query);
+        } catch (Exception ex) {
+            Logger.getLogger(Adding.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return isAdded;
+    }
+
+}
